@@ -43,5 +43,15 @@ public class AccountController {
         return ResponseEntity.badRequest().build();
     }
 
+    @GetMapping(value = "/total/{id}")
+    public ResponseEntity totalSpendAccount(@PathVariable Long id){
+        return ResponseEntity.ok(accountService.getTotalSpend(id));
+    }
+
+    @GetMapping(value = "/totalToSpend/{id}")
+    public ResponseEntity totalToSpend(@PathVariable Long id){
+        return ResponseEntity.ok(accountService.getTotalToSpend(id));
+    }
+
 
 }

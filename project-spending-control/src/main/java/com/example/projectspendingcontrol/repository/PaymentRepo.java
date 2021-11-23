@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface PaymentRepo extends JpaRepository<Payments, Long> {
     List<Payments> findByAccountIdAndDateBetween(Long id, LocalDate dateInit, LocalDate dateFinal);
+    List<Payments> findByAccountId(Long id);
 }

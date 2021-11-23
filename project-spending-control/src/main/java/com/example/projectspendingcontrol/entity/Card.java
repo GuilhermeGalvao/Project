@@ -1,10 +1,12 @@
 package com.example.projectspendingcontrol.entity;
 
 import com.example.projectspendingcontrol.enums.TypeEnum;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
+@Data
 @Table(name = "card")
 public class Card {
 
@@ -39,13 +41,6 @@ public class Card {
         this.id = id;
     }
 
-    public String getBalance() {
-        return balance;
-    }
-
-    public void setBalance(String balance) {
-        this.balance = balance;
-    }
 
     public TypeEnum getType() {
         return type;

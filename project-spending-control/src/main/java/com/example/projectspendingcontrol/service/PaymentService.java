@@ -1,11 +1,8 @@
 package com.example.projectspendingcontrol.service;
 
-import com.example.projectspendingcontrol.controller.form.CardForm;
 import com.example.projectspendingcontrol.controller.form.PaymentForm;
-import com.example.projectspendingcontrol.dto.CardDto;
 import com.example.projectspendingcontrol.dto.PaymentDto;
 import com.example.projectspendingcontrol.entity.Account;
-import com.example.projectspendingcontrol.entity.Card;
 import com.example.projectspendingcontrol.entity.Payments;
 import com.example.projectspendingcontrol.enums.TypeEnum;
 import com.example.projectspendingcontrol.repository.PaymentRepo;
@@ -13,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -85,6 +80,12 @@ public class PaymentService {
     public List<PaymentDto> getPaymentByDate(Long id, LocalDate dateInit) {
         LocalDate dateFinal = dateInit.plusMonths(1).withDayOfMonth(1);
         List<Payments> payments = paymentRepo.findByAccountIdAndDateBetween(id, dateInit, dateFinal);
+
+        return payments.stream().map(PaymentDto::new).collect(Collectors.toList());
+    }
+
+    public List<PaymentDto> getPaymentById(Long id) {
+        List<Payments> payments = paymentRepo.findByAccountId(id);
 
         return payments.stream().map(PaymentDto::new).collect(Collectors.toList());
     }
